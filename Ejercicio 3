@@ -1,0 +1,24 @@
+//Ejercicio 3
+public class Tarea1 {
+
+    class Nodo{
+        int data;
+        Nodo next;
+    }
+
+    boolean Ciclo(Nodo head){
+        if(head == null) return false;
+        Nodo rapido = head;
+        Nodo lento = head;
+
+        while (rapido != null && rapido.next != null){
+        if (rapido == lento){
+            return true;
+        }
+        rapido = rapido.next.next;
+        lento = lento.next;
+
+    }
+    return false;
+    }
+}
