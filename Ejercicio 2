@@ -1,0 +1,99 @@
+class Node{
+        Node next;
+
+		Object data;
+
+		Node(Object data) {
+			this.data = data;
+			next = null;
+		}
+}
+    
+class LinkedList{
+    Node head;
+    Node tail;
+    
+    LinkedList(){
+    }
+    
+    void insertBack (Object data){
+        Node aux = new Node(data);
+         
+        if (head == null) {
+            head = aux;
+            return;
+        }
+        else if (head != null && tail == null){
+            tail = aux;
+            head.next = tail;
+        }
+        else{
+            tail.next = aux;
+            tail = tail.next;
+        }
+    }
+}
+    
+public class Main {
+    
+    public static Node reverse(Node head){
+        Node first;
+
+    	if (head==null || head.next == null)
+    		return head;
+    
+    	first = reverse(head.next);
+    	head.next.next = head;
+    	head.next = null;
+    
+    	return first;
+        }
+    
+    public static Node threeReverse (Node head){
+        Node currentHead = head;
+        LinkedList auxiliar = new LinkedList();
+        while(currentHead != null){
+            LinkedList aux = new LinkedList();
+            aux.insertBack(currentHead.data);
+            currentHead = currentHead.next;
+            for(int i = 1; i < 3; i++){
+                if(currentHead == null){
+                    break;
+                }
+                if (i == 1){
+                    aux.insertBack(currentHead.data);
+                    currentHead = currentHead.next;
+                }
+                if (i == 2){
+                    aux.insertBack(currentHead.data);
+                    currentHead = currentHead.next;
+                }
+            }
+            Node auxH = aux.head;
+            
+            auxH = reverse(auxH);
+            while(auxH != null){
+                auxiliar.insertBack(auxH.data);
+                auxH = auxH.next;
+            }
+        }
+        return auxiliar.head;
+    }
+    
+    public static void main(String args[]) {
+      LinkedList lista = new LinkedList();
+      lista.insertBack(1);
+      lista.insertBack(2);
+      lista.insertBack(3);
+      lista.insertBack(4);
+      lista.insertBack(5);
+      lista.insertBack(6);
+      lista.insertBack(7);
+      lista.insertBack(8);
+      Node resultado = threeReverse(lista.head);
+      while(resultado != null){
+           System.out.println(resultado.data);
+           resultado = resultado.next;
+      }
+    }
+}
