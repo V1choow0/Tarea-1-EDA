@@ -1,0 +1,35 @@
+import java.util.*;
+
+class problema1 {
+
+    public static int funcion(LinkedList<Integer> lista){
+        int largo = lista.size();
+        boolean elimina = false;
+        while(true){
+            for(int i = 0; i < largo; i++){
+                if (lista.size() <= 1) {
+                    return lista.getLast();
+                }
+                if (elimina) {
+                    lista.remove(i);
+                    i--;
+                    largo = lista.size();
+                    elimina = !elimina;
+                }
+                else {
+                    elimina = !elimina;
+                }
+            }
+        }
+    }
+    public static void main(String[] args){
+        LinkedList<Integer> lista = new LinkedList<Integer>();
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        for(int i = 0; i < N; i++){
+            lista.add(sc.nextInt());
+        }
+
+        System.out.println(funcion(lista));
+    }
+}
